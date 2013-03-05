@@ -1,0 +1,6 @@
+libcommons-jexl2-java (2.1.1-1) unstable; urgency=low
+
+  * Initial packaging of jexl2
+
+ -- The Genome Institute <gmt@genome.wustl.edu>  Tue, 05 Mar 2013 25:56:12 -0600
+

@@ -1,0 +1,22 @@
+Source: libcommons-jexl2java
+Section: java
+Priority: optional
+Maintainer: The Genome Institute at Washington University <gmt@genome.wustl.edu>
+Uploaders: Thomas Mooney <tmooney@genome.wustl.edu>
+Build-Depends: cdbs, debhelper (>= 7)
+Build-Depends-Indep: ant,
+                     default-jdk,
+                     junit,
+                     libcommons-logging-java,
+                     maven-repo-helper
+Standards-Version: 3.9.2
+Homepage: http://commons.apache.org/jexl
+
+Package: libcommons-jexl2-java
+Architecture: all
+Depends: ${misc:Depends}
+Description: expression language engine
+ This library is an expression language engine for easy embedding in
+ applications and frameworks. It implements an extented version of the
+ Expression Language of the JSTL (Java Standard Tag Library, java server
+ related technology).

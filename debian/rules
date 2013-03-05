@@ -1,0 +1,33 @@
+#!/usr/bin/make -f
+# debian/rules for libcommons-jexl-java (uses CDBS)
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/ant.mk
+
+JAVA_HOME            := /usr/lib/jvm/default-java/
+DEB_JARS             := junit commons-logging
+DEB_ANT_BUILD_TARGET := jar
+#DEB_ANT_TEST_TARGET := test
+ANT_OPTS             := -Dant.build.javac.source=1.5 -Dant.build.javac.target=1.5
+PACKAGE              := commons-jexl2
+MAVEN_REPO           := http://repo1.maven.org/maven2
+
+LIBRARY=commons-jexl
+
+install/libcommons-jexl2-java::
+	ln -s commons-jexl-$(DEB_UPSTREAM_VERSION).jar debian/libcommons-jexl2-java/usr/share/java/commons-jexl2.jar
+
+binary-post-install/lib$(PACKAGE)-java::
+	mh_installpoms -plib$(PACKAGE)-java
+	mh_installjar -plib$(PACKAGE)-java -l debian/poms/$(PACKAGE).pom target/$(PACKAGE)-$(DEB_UPSTREAM_VERSION).jar 
+
+get-orig-source::
+	uscan --verbose --force-download --rename
+
+get-orig-pom:
+	mkdir -p debian/poms
+	wget  -U NoSuchBrowser/1.0 -O debian/poms/$(PACKAGE).pom \
+		$(MAVEN_REPO)/commons-jexl/$(PACKAGE)/$(DEB_UPSTREAM_VERSION)/$(PACKAGE)-$(DEB_UPSTREAM_VERSION).pom
