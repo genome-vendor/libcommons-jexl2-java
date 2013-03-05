@@ -5,20 +5,22 @@
 #export DH_VERBOSE=1
 
 include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/class/ant.mk
+include /usr/share/cdbs/1/class/maven.mk
 
 JAVA_HOME            := /usr/lib/jvm/default-java/
-DEB_JARS             := junit commons-logging
+CLASSPATH            := .:/usr/share/java/maven-resources-plugin.jar:/usr/share/java/maven-compiler-plugin.jar:/usr/share/java/javacc-maven-plugin.jar:/usr/share/java/javacc.jar:/usr/share/java/bsf.jar
+DEB_JARS             := javacc junit commons-logging ant ant-launcher bsf
 DEB_ANT_BUILD_TARGET := jar
 #DEB_ANT_TEST_TARGET := test
 ANT_OPTS             := -Dant.build.javac.source=1.5 -Dant.build.javac.target=1.5
 PACKAGE              := commons-jexl2
 MAVEN_REPO           := http://repo1.maven.org/maven2
 
-LIBRARY=commons-jexl
+LIBRARY=commons-jexl2
 
 install/libcommons-jexl2-java::
-	ln -s commons-jexl-$(DEB_UPSTREAM_VERSION).jar debian/libcommons-jexl2-java/usr/share/java/commons-jexl2.jar
+	mv target/commons-jexl-$(DEB_UPSTREAM_VERSION).jar target/$(PACKAGE)-$(DEB_UPSTREAM_VERSION).jar
+	ln -s $(PACKAGE)-$(DEB_UPSTREAM_VERSION).jar debian/libcommons-jexl2-java/usr/share/java/commons-jexl2.jar
 
 binary-post-install/lib$(PACKAGE)-java::
 	mh_installpoms -plib$(PACKAGE)-java

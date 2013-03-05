@@ -1,14 +1,17 @@
-Source: libcommons-jexl2java
+Source: libcommons-jexl2-java
 Section: java
 Priority: optional
 Maintainer: The Genome Institute at Washington University <gmt@genome.wustl.edu>
 Uploaders: Thomas Mooney <tmooney@genome.wustl.edu>
-Build-Depends: cdbs, debhelper (>= 7)
+Build-Depends: cdbs, debhelper (>= 7), maven-debian-helper
 Build-Depends-Indep: ant,
                      default-jdk,
                      junit,
                      libcommons-logging-java,
-                     maven-repo-helper
+                     maven-repo-helper,
+                     libmaven-assembly-plugin-java,
+                     libjavacc-maven-plugin-java,
+                     javacc (>= 5.0-4)
 Standards-Version: 3.9.2
 Homepage: http://commons.apache.org/jexl
 
