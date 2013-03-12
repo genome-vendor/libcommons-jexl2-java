@@ -18,13 +18,9 @@ MAVEN_REPO           := http://repo1.maven.org/maven2
 
 LIBRARY=commons-jexl2
 
-install/libcommons-jexl2-java::
-	mv target/commons-jexl-$(DEB_UPSTREAM_VERSION).jar target/$(PACKAGE)-$(DEB_UPSTREAM_VERSION).jar
-	ln -s $(PACKAGE)-$(DEB_UPSTREAM_VERSION).jar debian/libcommons-jexl2-java/usr/share/java/commons-jexl2.jar
-
 binary-post-install/lib$(PACKAGE)-java::
 	mh_installpoms -plib$(PACKAGE)-java
-	mh_installjar -plib$(PACKAGE)-java -l debian/poms/$(PACKAGE).pom target/$(PACKAGE)-$(DEB_UPSTREAM_VERSION).jar 
+	mh_installjar -plib$(PACKAGE)-java -l pom.xml target/$(PACKAGE)-$(DEB_UPSTREAM_VERSION).jar 
 
 get-orig-source::
 	uscan --verbose --force-download --rename
